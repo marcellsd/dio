@@ -8,7 +8,7 @@ from models.database import TransactionType
 class UserCreate(BaseModel):
     username: str = Field(..., min_length=3, max_length=50)
     email: EmailStr
-    password: str = Field(..., min_length=6)
+    password: str = Field(..., min_length=6, max_length=72, description="Password must be between 6 and 72 characters")
 
 
 class UserResponse(BaseModel):
@@ -76,5 +76,5 @@ class TokenData(BaseModel):
 
 class LoginRequest(BaseModel):
     username: str
-    password: str
+    password: str = Field(..., max_length=72, description="Password cannot exceed 72 characters")
 
